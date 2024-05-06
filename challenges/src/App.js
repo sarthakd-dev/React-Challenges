@@ -2,7 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import { useRef } from "react";
 function App() {
-  const reactLink= useRef("block");
+  const reactLink= useRef(null);
+  const togglefxn= ()=>{
+    if(reactLink.current){ 
+      reactLink.current.style.display = "none";
+    }
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -18,10 +23,11 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={() =>togglefxn()}>Toggle above link!</button>
       </header>
     </div>
   );
 }
 
 export default App;
-export {reactLink};
+// export {reactLink};
