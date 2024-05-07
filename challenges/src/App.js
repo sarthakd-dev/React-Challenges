@@ -1,12 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
-import { useRef } from "react";
+import { useRef,useState } from "react";
 function App() {
+  const [showhide, setshowHide] = useState(true);
   const reactLink= useRef(null);
   const togglefxn= ()=>{
-    if(reactLink.current){ 
+    if(reactLink.current && showhide){ 
       reactLink.current.style.display = "none";
+      setshowHide(false);
     }
+    if(reactLink.current && !showhide){ 
+      reactLink.current.style.display = "block";
+      setshowHide(true);
+    }
+
   }
   return (
     <div className="App">
