@@ -27,13 +27,13 @@ var [running, setrunning] = useState(false);
    
 
   }
-  useEffect(() => {
-    return () => {
-      if (running) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [running]);
+  // useEffect(() => {
+  //   return () => {
+  //     if (running) {
+  //       clearInterval(intervalId);
+  //     }
+  //   };
+  // }, [running]);
   return (
     <div className="App">
       <header className="App-header">
