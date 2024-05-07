@@ -1,25 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
-import { useRef,useState } from "react";
+import {useState, useEffect } from "react";
+var intervalId ;
 function App() {
-  const [showhide, setshowHide] = useState(false);
-  const [counter, setCounter] = useState(0);
-  const reactLink= useRef(null);
+var [running, setrunning] = useState(false);
+  var [counter, setCounter] = useState(0);
+ 
   const togglefxn= ()=>{
-    setshowHide(showhide? false: true);
-    if(showhide){ 
-      alert("aaya");
-      while(showhide){
-       setCounter(counter +1);
-      }
+    debugger
+    setrunning(running => !running);
+     if(!running){
+       intervalId = setInterval(() => {
+       setCounter(counter =>counter +1);
+       console.log(counter);
       
-    }
-    // if(reactLink.current && !showhide){ 
-    //   reactLink.current.style.display = "block";
-    //   setshowHide(true);
-    // }
+    }, 1000); 
+  }else{
+    alert("20lac package!");
+ // Clear the interval on unmount
+ clearInterval(intervalId);
+ setrunning(false);
+ setCounter(0);
+  //   return () => clearInterval(intervalId);
+  // }, []); 
+  }
+   
 
   }
+  useEffect(() => {
+    return () => {
+      if (running) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [running]);
   return (
     <div className="App">
       <header className="App-header">
@@ -27,8 +41,8 @@ function App() {
         <p>
           Use the timer button to start and stop the clock
         </p>
-        <div useRef={reactLink}>{counter}</div>
-        <button onClick={() =>togglefxn()}>Start!</button>
+        <div >{counter}</div>
+        <button style={{cursor: "pointer"}} onClick={() =>togglefxn()}>Start!</button>
       </header>
     </div>
   );
