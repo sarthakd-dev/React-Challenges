@@ -2,17 +2,22 @@ import logo from './logo.svg';
 import './App.css';
 import { useRef,useState } from "react";
 function App() {
-  const [showhide, setshowHide] = useState(true);
+  const [showhide, setshowHide] = useState(false);
+  const [counter, setCounter] = useState(0);
   const reactLink= useRef(null);
   const togglefxn= ()=>{
-    if(reactLink.current && showhide){ 
-      reactLink.current.style.display = "none";
-      setshowHide(false);
+    setshowHide(showhide? false: true);
+    if(showhide){ 
+      alert("aaya");
+      while(showhide){
+       setCounter(counter +1);
+      }
+      
     }
-    if(reactLink.current && !showhide){ 
-      reactLink.current.style.display = "block";
-      setshowHide(true);
-    }
+    // if(reactLink.current && !showhide){ 
+    //   reactLink.current.style.display = "block";
+    //   setshowHide(true);
+    // }
 
   }
   return (
@@ -20,17 +25,10 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Use the timer button to start and stop the clock
         </p>
-        <a ref={reactLink}
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={() =>togglefxn()}>Toggle above link!</button>
+        <div useRef={reactLink}>{counter}</div>
+        <button onClick={() =>togglefxn()}>Start!</button>
       </header>
     </div>
   );
