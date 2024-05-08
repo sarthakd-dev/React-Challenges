@@ -16,7 +16,6 @@ var [running, setrunning] = useState(false);
       
     }, 1000); 
   }else{
-    alert("20lac package!");
  // Clear the interval on unmount
  clearInterval(intervalId);
  setrunning(false);
